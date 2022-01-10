@@ -5,7 +5,7 @@ import { Box, Typography, FormControl, FormLabel, FormControlLabel, FormGroup, C
 export const TrangChu = () => {
     return (
         <div className='Container'>
-             <Box
+             {/* <Box
                 sx={{
                     margin: 'auto',
                     width: 600,
@@ -28,7 +28,7 @@ export const TrangChu = () => {
                     <FormControlLabel control={<Checkbox  />} label="Cổng 6" />
                 </FormGroup>
                 </FormControl>
-                </Box>
+                </Box> */}
                 
         </div>
     )

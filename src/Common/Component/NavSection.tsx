@@ -3,6 +3,7 @@ import AVT from '../Style/img/avatar.png';
 import Logo from '../Style/img/logo-insight.png'
 import '../Style/css/navHeader.scss'
 import TrangChu from '../../Views/TrangChu/TrangChu';
+import QuanLyVe  from '../../Views/QuanlyVe/QuanLyVe';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
@@ -184,7 +185,7 @@ export const NavSection = () => {
           <Grid item xs={11} mt={10}>
             <div className="ChildComponent">
               {showHome && <TrangChu/>}
-              {showManage && <></>}
+              {showManage && <QuanLyVe/>}
               {showControl && <></>}
               {showSetting && <></>}
               {showProfile && <></>}
