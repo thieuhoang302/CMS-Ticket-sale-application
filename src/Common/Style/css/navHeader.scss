@@ -16,7 +16,7 @@
   
  .Logoheader{
    border-bottom: none !important;
-   margin: 15px 0px 0px 11px ;
+   margin: 10px 0px 0px 11px ;
    .logo {
     display: block;
     width: 133px;
@@ -29,7 +29,7 @@
   #subHeader {
     position: absolute;
     width: 240px;
-    z-index: 99999;
+    z-index: 100;
     
   }
   
@@ -126,22 +126,21 @@
   }
   
   .rightSide {
-    margin-left: 0px;
+    margin-left: -4px;
   }
   
   .header {
     position: absolute;
     top: 0;
     right: 0;
-    margin: 15px 35px;
+    margin: 10px 35px;
     text-align: right;
-    width: 80%;
+    width: 81%;
   }
   .ChildComponent{
     margin-right: 35px;
-    margin-left: 145px;
-    background-color: #FFFFFF;
-    max-height: 963px;
-    height: 620px;
-    border-radius: 24px;
+    margin-left: 125px;
+  }
+  .css-1k35h7p-MuiGrid-root{
+    margin-top: 75px !important;
   }

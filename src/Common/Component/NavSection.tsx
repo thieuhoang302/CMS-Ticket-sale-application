@@ -4,6 +4,8 @@ import Logo from '../Style/img/logo-insight.png'
 import '../Style/css/navHeader.scss'
 import TrangChu from '../../Views/TrangChu/TrangChu';
 import QuanLyVe  from '../../Views/QuanlyVe/QuanLyVe';
+import DoiSoatVe from '../../Views/DoiSoatVe/DoiSoatVe';
+import CaiDat from '../../Views/CaiDat/CaiDat';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
 import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
@@ -84,6 +86,8 @@ export const NavSection = () => {
       setShowProfile(true);
     }
   };
+  
+
 
   return (
       <div className='Acc-noti-mail'>
@@ -186,8 +190,8 @@ export const NavSection = () => {
             <div className="ChildComponent">
               {showHome && <TrangChu/>}
               {showManage && <QuanLyVe/>}
-              {showControl && <></>}
-              {showSetting && <></>}
+              {showControl && <DoiSoatVe />}
+              {showSetting && <CaiDat/>}
               {showProfile && <></>}
             </div>
           </Grid>

@@ -3,7 +3,6 @@ import { filter } from "lodash";
 // material
 import {
   Stack,
-  Button,
   TableRow,
   TableBody,
   TableCell,
@@ -19,68 +18,47 @@ import {
   Fade,
   Backdrop 
 } from "@mui/material";
-import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
 // components
 import HeadTable from "../../Common/Component/HeadTable";
 import ToolbarTable from "../../Common/Component/ToolbarTable";
 import TableMoreMenu from "../../Common/Component/TableMoreMenu";
 import FilterCpn from "../../Common/Component/FilterCpn";
-import './Quanlyve.scss'
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
   { id: "stt", label: "STT", alignRight: false },
-  { id: "bookcode", label: "Booking Code", alignRight: false },
-  { id: "number", label: "Số Vé", alignRight: false },
-  { id: "event", label: "Tên sự kiện", alignRight: false },
-  { id: "status", label: "Tình trạng sử dụng", alignRight: false },
-  { id: "datesd", label: "Ngày sử dụng", alignRight: false },
-  { id: "datexv", label: "Ngày xuất vé", alignRight: false },
-  { id: "cong", label: "Cổng check - in", alignRight: false },
-  { id: "" },
+  { id: "bookcode", label: "Mã gói", alignRight: false },
+  { id: "namegoive", label: "Tên gói vé", alignRight: false },
+  { id: "datead", label: "Ngày áp dụng", alignRight: false },
+  { id: "dateexpired", label: "Ngày hết hạn", alignRight: false },
+  { id: "prices", label: "Giá vé (VNĐ/Vé)", alignRight: false },
+  { id: "comboprices", label: "Giá Combo (VNĐ/Combo)", alignRight: false },
+  { id: "status", label: "Tình trạng", alignRight: false },
+  { id: " " },
+  
 ];
 
 const USERLIST = [
   {
-    stt: "1",
-    bookcode: "ALT20210501",
-    number: "123456789034",
-    event: "Hội chợ triển lãm tiêu dùng 2021",
-    status: "Đã sử dụng",
-    datesd: "14/04/2021",
-    datexv: "14/04/2021",
-    cong: "Cổng 1",
+    stt:"1",
+    bookcode:"ALT20210501",
+    namegoive:"Gói gia đình",
+    datead:"14/04/2021",
+    dateexpired:"14/04/2021",
+    prices:"90.000 VNĐ",
+    comboprices:"360.000 VNĐ/4 Vé",
+    status:"Đang áp dụng",
   },
   {
-    stt: "2",
-    bookcode: "ALT20210501",
-    number: "123456789034",
-    event: "Hội chợ triển lãm tiêu dùng 2021",
-    status: "Đã sử dụng",
-    datesd: "14/04/2021",
-    datexv: "14/04/2021",
-    cong: "Cổng 1"
-  },
-  {
-    stt: "3",
-    bookcode: "ALT20210501",
-    number: "123456789035",
-    event: "Hội chợ triển lãm tiêu dùng 2021",
-    status: "Đã sử dụng",
-    datesd: "14/04/2021",
-    datexv: "14/04/2021",
-    cong: "Cổng 1"
-  },
-  {
-    stt: "4",
-    bookcode: "ALT20210501",
-    number: "123456789036",
-    event: "Hội chợ triển lãm tiêu dùng 2021",
-    status: "Đã sử dụng",
-    datesd: "14/04/2021",
-    datexv: "14/04/2021",
-    cong: "Cổng 1"
-  },
+    stt:"2",
+    bookcode:"ALT20210501",
+    namegoive:"Gói sự kiện",
+    datead:"14/04/2021",
+    dateexpired:"14/04/2021",
+    prices:"20.000 VNĐ",
+    comboprices:" ",
+    status:"Tắt",
+  }
 ];
 
 // ----------------------------------------------------------------------
@@ -135,7 +113,7 @@ function applySortFilter(array: any, comparator: any, query: any) {
 }
 
 
-export const QuanLyVe = () => {
+export const CaiDat = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -179,7 +157,7 @@ export const QuanLyVe = () => {
     <div className="mainTC">
       <div className="container-table">
       <Typography className="Title-QLV">
-        Danh sách vé
+        Danh sách gói vé
       </Typography>
         <Box sx={{ width: '100%' }}>
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
@@ -192,9 +170,9 @@ export const QuanLyVe = () => {
             <Grid item xs={6}>
               <div style={{ float: 'right'}}>
               <div>
-                </div>    
-                  <button className="button-28" role="button" onClick={handleOpen}><FilterAltOutlinedIcon/>Lọc vé</button>    
-                  <button className="button-28" role="button" style={{ marginLeft: '10px'}}>Xuất file (.cvs)</button>
+                </div>      
+                  <button className="button-28" role="button" >Xuất file (.cvs)</button>
+                  <button className="button-28" role="button" onClick={handleOpen} style={{ marginLeft: '10px' }}>Thêm gói vé</button>  
                 </div>
                 
                   <Modal
@@ -218,7 +196,7 @@ export const QuanLyVe = () => {
                         boxShadow: 24,
                         p: 4,
                     }}>
-                      <FilterCpn/>
+                      Update late
                     </Box>
                   </Fade>
                 </Modal>  
@@ -248,12 +226,12 @@ export const QuanLyVe = () => {
                   const {
                     stt,
                     bookcode,
-                    number,
-                    event,
+                    namegoive,
+                    datead,
+                    dateexpired,
+                    prices,
+                    comboprices,
                     status,
-                    datesd,
-                    datexv,
-                    cong,
                   } = row;
 
                   return (
@@ -270,16 +248,16 @@ export const QuanLyVe = () => {
                           </Typography>
                         </Stack>
                       </StyledTableCell>
-                      <StyledTableCell align="left">{number}</StyledTableCell>
+                      <StyledTableCell align="left">{namegoive}</StyledTableCell>
                       <StyledTableCell align="left">
-                        {event}
+                        {datead}
                       </StyledTableCell>
+                      <StyledTableCell align="left">{dateexpired}</StyledTableCell>
+                      <StyledTableCell align="left">{prices}</StyledTableCell>
+                      <StyledTableCell align="left">{comboprices}</StyledTableCell>
                       <StyledTableCell align="left">{status}</StyledTableCell>
-                      <StyledTableCell align="left">{datesd}</StyledTableCell>
-                      <StyledTableCell align="left">{datexv}</StyledTableCell>
-                      <StyledTableCell align="left">{cong}</StyledTableCell>
                       <StyledTableCell align="right">
-                        {/* <TableMoreMenu /> */}
+                        Cập nhập
                       </StyledTableCell>
                     </StyledTableRow>
                   );
@@ -307,4 +285,4 @@ export const QuanLyVe = () => {
       );
 };
 
-export default QuanLyVe;
+export default CaiDat;

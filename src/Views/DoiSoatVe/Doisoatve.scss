@@ -1,10 +1,5 @@
-.mainTC{
-    background-color: #FFFFFF;
-    border-radius: 24px;
-    height: 620px;
-    .container-table{
-        margin: 0px 20px 20px 20px;
-    }
+.container-table{
+    margin: 0px 20px 20px 20px;
     .Title-QLV{
         font-family: Montserrat !important;
         font-style: normal !important;
@@ -13,11 +8,11 @@
         margin-bottom: 32px !important;
     
         color: #000000;
-    
-    }
-
-    .css-18zvy6t-MuiTableCell-root{
-        padding: 14px !important;
     }
 }
+.bg {
+    background-color: white;
+    border-radius: 8px;
+    height: 620px;
 
+}
