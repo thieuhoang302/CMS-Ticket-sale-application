@@ -1,5 +1,6 @@
 import React from 'react'
 import '../Style/css/buttonOutline.scss'
+import '../Style/css/labelcheckbox.scss'
 import { Box, 
     Typography, 
     FormControl, 
@@ -25,20 +26,20 @@ export const FilterCpn = () => {
                 </Typography>
                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                     <Grid item xs={6}>
-                        <Typography sx={{ fontWeight: 'bold', color: '#1E0D03' }}>
+                        <Typography sx={{ fontWeight: '600', color: '#1E0D03' }}>
                             Từ ngày
                         </Typography>
                         calendar here!
                     </Grid>
                     <Grid item xs={6}>
-                        <Typography sx={{ fontWeight: 'bold', color: '#1E0D03' }}>
+                        <Typography sx={{ fontWeight: '600', color: '#1E0D03' }}>
                             Đến ngày
                         </Typography>
                         calendar here!
                     </Grid>
                 </Grid>
                 <FormControl component="fieldset" sx={{ marginTop: '20px'}}>
-                    <Typography sx={{ color: '#1E0D03', fontWeight: 'bold'}}>Tình trạng sử dụng</Typography>
+                    <Typography sx={{ color: '#1E0D03', fontWeight: '600'}}>Tình trạng sử dụng</Typography>
                         <RadioGroup sx={{ marginLeft: '10px', width:"100%"}} row name="row-radio-buttons-group">
                             <FormControlLabel style={{marginRight:"20px"}} value="all" control={<Radio sx={{ color: '#27AEF9 !important' }}/>} label="Tất cả" />
                             <FormControlLabel style={{margin:"20px"}} value="used" control={<Radio sx={{ color: '#27AEF9 !important' }}/>} label="Đã sử dụng" />
@@ -47,7 +48,7 @@ export const FilterCpn = () => {
                         </RadioGroup>
                 </FormControl>
                 <FormControl component="fieldset" sx={{width:"100%"}}>
-                <Typography sx={{ color: '#1E0D03', fontWeight: 'bold'  }}>Cổng Check - in</Typography>
+                <Typography sx={{ color: '#1E0D03', fontWeight: '600'  }}>Cổng Check - in</Typography>
                     <FormGroup sx={{ marginLeft: '10px', marginTop: '10px'}} aria-label="position" row>
                         <Grid container spacing={3}>
                             <Grid item xs>
@@ -75,7 +76,7 @@ export const FilterCpn = () => {
                     </Grid>
                 </FormGroup> 
                 <div style={{textAlign:"center"}}>
-                <button className="button-28" style={{ width:"160px", marginTop:"20px"}} role="button">Lọc</button>
+                <button className="button-28" style={{ width:"140px", marginTop:"20px", marginBottom: "3px"}} role="button">Lọc</button>
                 </div>
                 </FormControl>
                 

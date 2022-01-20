@@ -12,7 +12,36 @@
 }
 .bg {
     background-color: white;
-    border-radius: 8px;
+    border-radius: 24px;
     height: 620px;
 
+}
+.filter{
+    margin: 0px 20px 20px 20px;
+}
+.uncontested{
+    font-style: italic;
+    font-weight: 500;
+    font-size: 14px;
+    /* or 157% */
+    
+    display: flex;
+    align-items: center;
+    
+    /* Grey/4 */
+    
+    color: #A5A8B1;
+}
+.Checked{
+    font-style: italic;
+    font-weight: 500;
+    font-size: 14px;
+    /* or 157% */
+    
+    display: flex;
+    align-items: center;
+    
+    /* Grey/4 */
+    
+    color: #FD5959;
 }

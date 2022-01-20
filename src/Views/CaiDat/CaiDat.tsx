@@ -16,14 +16,18 @@ import {
   Box,
   Modal,
   Fade,
-  Backdrop 
+  Backdrop ,
+  Button
 } from "@mui/material";
+import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
 // components
 import HeadTable from "../../Common/Component/HeadTable";
 import ToolbarTable from "../../Common/Component/ToolbarTable";
 import TableMoreMenu from "../../Common/Component/TableMoreMenu";
-import FilterCpn from "../../Common/Component/FilterCpn";
-// ----------------------------------------------------------------------
+import AddTicket from "../../Common/Component/AddTicket";
+import UpdateTicket from "../../Common/Component/UpdateTicket";
+import '../../Common/Style/css/colorTabs.scss'
+// ---------------------------------------------------------------------
 
 const TABLE_HEAD = [
   { id: "stt", label: "STT", alignRight: false },
@@ -117,6 +121,10 @@ export const CaiDat = () => {
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
+
+  const [openUD, setOpenUD] = React.useState(false);
+  const handleOpenUD = () => setOpenUD(true);
+  const handleCloseUD = () => setOpenUD(false);
   
   const [page, setPage] = useState(0);
   const [order, setOrder] = useState("asc");
@@ -172,7 +180,7 @@ export const CaiDat = () => {
               <div>
                 </div>      
                   <button className="button-28" role="button" >Xuất file (.cvs)</button>
-                  <button className="button-28" role="button" onClick={handleOpen} style={{ marginLeft: '10px' }}>Thêm gói vé</button>  
+                  <button className="button-29" role="button" onClick={handleOpen} style={{ marginLeft: '10px' }}>Thêm gói vé</button>  
                 </div>
                 
                   <Modal
@@ -190,13 +198,14 @@ export const CaiDat = () => {
                         top: '50%',
                         left: '50%',
                         transform: 'translate(-50%, -50%)',
-                        width: 600,
+                        width: 700,
                         bgcolor: 'background.paper',
                         borderRadius: '16px',
                         boxShadow: 24,
                         p: 4,
+                        padding: '18px !important',
                     }}>
-                      Update late
+                      <AddTicket/>
                     </Box>
                   </Fade>
                 </Modal>  
@@ -255,9 +264,40 @@ export const CaiDat = () => {
                       <StyledTableCell align="left">{dateexpired}</StyledTableCell>
                       <StyledTableCell align="left">{prices}</StyledTableCell>
                       <StyledTableCell align="left">{comboprices}</StyledTableCell>
-                      <StyledTableCell align="left">{status}</StyledTableCell>
+                      <StyledTableCell align="left">
+                        <div className={
+                          status === "Đang áp dụng" ? "using" : status === "Tắt" ? "off" : "notthing"
+                        }>
+                      <li/>{status}
+                      </div></StyledTableCell>
                       <StyledTableCell align="right">
-                        Cập nhập
+                        <Button sx={{ color: '#FF993C !important' }} onClick={handleOpenUD} variant="text"><AutoFixHighOutlinedIcon/>Cập nhập</Button>
+                          <Modal
+                          open={openUD}
+                          onClose={handleCloseUD}
+                          closeAfterTransition
+                          BackdropComponent={Backdrop}
+                          BackdropProps={{
+                            timeout: 500,
+                          }}
+                        >
+                          <Fade in={openUD}>
+                            <Box sx={{
+                                position: 'absolute',
+                                top: '50%',
+                                left: '50%',
+                                transform: 'translate(-50%, -50%)',
+                                width: 700,
+                                bgcolor: 'background.paper',
+                                borderRadius: '16px',
+                                boxShadow: 24,
+                                p: 4,
+                                padding: '18px !important',
+                            }}>
+                              <UpdateTicket/>
+                            </Box>
+                            </Fade>
+                          </Modal> 
                       </StyledTableCell>
                     </StyledTableRow>
                   );
@@ -270,7 +310,7 @@ export const CaiDat = () => {
             </TableBody>
           </Table>
         </TableContainer>
-
+        
         <TablePagination
           rowsPerPageOptions={[5, 10, 25]}
           component="div"

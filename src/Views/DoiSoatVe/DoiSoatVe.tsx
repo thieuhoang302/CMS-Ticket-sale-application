@@ -14,12 +14,16 @@ Box,
   TablePagination,
   styled,
   tableCellClasses,
-  Grid
+  Grid,
+  RadioGroup,
+  FormControlLabel,
+  Radio
 } from "@mui/material";
 // components
 import HeadTable from "../../Common/Component/HeadTable";
 import ToolbarTable from "../../Common/Component/ToolbarTable";
 import "./Doisoatve.scss"
+import '../../Common/Style/css/labelcheckbox.scss'
 import { height } from "@mui/system";
 
 const TABLE_HEAD = [
@@ -38,7 +42,7 @@ const TABLE_HEAD = [
       datesd: "14/04/2021",
       nameve: "Vé cổng",
       cong: "Cổng 1",
-      doisoat: "Đã đối soát",
+      doisoat: "Chưa đối soát",
     },
     {
       stt: "2",
@@ -223,9 +227,12 @@ export const DoiSoatVe = () => {
                                             {nameve}
                                         </StyledTableCell>
                                         <StyledTableCell align="left">{cong}</StyledTableCell>
-                                        <StyledTableCell align="right" sx={{ color: "#FD5959"}}>
-                                            {doisoat}
-                                        </StyledTableCell>
+                                        <StyledTableCell align="right">
+                                        <div className={
+                                            doisoat === "Chưa đối soát" ? "uncontested" : doisoat === "Đã đối soát" ? "Checked" : "notthing"
+                                          }>
+                                        {doisoat}
+                                        </div></StyledTableCell>
                                         </StyledTableRow>
                                     );
                                     })}
@@ -252,7 +259,50 @@ export const DoiSoatVe = () => {
                 </Grid>
                 <Grid sx={{width: '372px'}}>
                     <div className='bg'>
-                      Update late
+                        <div className="filter">
+                        <Typography sx={{ fontWeight: 'bold', paddingTop: '10px', fontSize: '24px', paddingBottom: '20px'}}>
+                            Lọc vé
+                        </Typography>
+                          <Grid container spacing={1.5} columns={16}>
+                            <Grid item xs={7}>
+                            <p style={{ fontWeight: '600'}}>Tình trạng đối soát</p>
+                            </Grid>
+                            <Grid item xs={9}>
+                              <RadioGroup sx={{ marginLeft: '10px', width:"100%"}} row name="row-radio-buttons-group">
+                                <FormControlLabel style={{marginBottom: '10px'}} value="all" control={<Radio sx={{ color: '#27AEF9 !important' }}/>} label="Tất cả" />
+                                <FormControlLabel style={{marginBottom: '10px'}} value="used" control={<Radio sx={{ color: '#27AEF9 !important' }}/>} label="Đã đối soát" />
+                                <FormControlLabel style={{marginBottom: '20px'}} value="notused" control={<Radio sx={{ color: '#27AEF9 !important' }}/>} label="Chưa đối soát" />
+                              </RadioGroup>
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={1.5} columns={16}>
+                            <Grid item xs={7}>
+                              <p style={{ fontWeight: '600'}}> Loại vé</p>
+                            </Grid>
+                            <Grid item xs={9}>
+                              Vé cổng
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={1.5} columns={16}>
+                            <Grid item xs={7}>
+                            <p style={{ fontWeight: '600'}}>Từ ngày</p>
+                            </Grid>
+                            <Grid item xs={9}>
+                              lịch
+                            </Grid>
+                        </Grid>
+                        <Grid container spacing={1.5} columns={16}>
+                            <Grid item xs={7}>
+                            <p style={{ fontWeight: '600'}}>Đến ngày</p>
+                            </Grid>
+                            <Grid item xs={9}>
+                              lịch
+                            </Grid>
+                        </Grid>
+                        <div style={{textAlign:"center"}}>
+                        <button className="button-28" style={{ width:"140px", marginTop:"20px"}} role="button">Lọc</button>
+                        </div>
+                        </div>
                     </div>
                 </Grid>
             </Grid>

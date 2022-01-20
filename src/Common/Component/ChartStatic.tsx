@@ -1,43 +1,51 @@
-import React, { useState } from 'react'
-import ReactApexChart from 'react-apexcharts';
+import React from "react";
+import ReactApexChart from "react-apexcharts";
 
-export const ChartStatic = () => {
-    const [state, setState ] = useState({
-        series: [{
-            name: 'series1',
-            data: [31, 40, 28, 51, 42, 109, 100]
-          }],
-          options: {
-            chart: {
-              height: 350,
-              type: 'area'
-            },
-            dataLabels: {
-              enabled: false
-            },
-            stroke: {
-              curve: 'smooth'
-            },
-            xaxis: {
-              type: 'datetime',
-              categories: ["2018-09-19T00:00:00.000Z", "2018-09-19T01:30:00.000Z", "2018-09-19T02:30:00.000Z", "2018-09-19T03:30:00.000Z", "2018-09-19T04:30:00.000Z", "2018-09-19T05:30:00.000Z", "2018-09-19T06:30:00.000Z"]
-            },
-            tooltip: {
-              x: {
-                format: 'dd/MM/yy HH:mm'
-              },
-            },
-          },
-    });
-    return (
-        <div>
-            <ReactApexChart 
-            options={state.options} 
-            series={state.series} 
-            ype="area" 
-            height={350} />
-        </div>
-    )
-}
+const ChartStatic = () => {
+  const xList = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"];
+  const yList = [145, 170, 178, 231, 212, 198 , 188];
 
-export default ChartStatic;
+  const chartSeries = [
+    {
+      name: "Fuel Usage",
+      data: yList
+    }
+  ];
+
+  const chartOptions = {
+    chart: { toolbar: "false" },
+    dataLabels: { enabled: !1 },
+    stroke: { curve: "smooth", width: 2 },
+    markers: { size: 0, style: "hollow" },
+    xaxis: {
+      categories: xList
+    },
+    yaxis: {
+      tickAmount: 3,
+      min: 140,
+      max: 260,
+    },
+    colors: ["#FF993C"],
+    fill: {
+      type: "gradient",
+      gradient: {
+        shadeIntensity: 1,
+        opacityFrom: 0.4,
+        opacityTo: 0.05,
+        stops: [50, 100, 100, 100]
+      }
+    }
+  };
+
+  return (
+    <ReactApexChart
+      options={chartOptions}
+      series={chartSeries}
+      type="area"
+      height={250}
+    />
+  );
+};
+
+export default ChartStatic
+

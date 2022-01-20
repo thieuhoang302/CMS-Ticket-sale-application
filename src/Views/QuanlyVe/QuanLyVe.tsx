@@ -26,6 +26,7 @@ import ToolbarTable from "../../Common/Component/ToolbarTable";
 import TableMoreMenu from "../../Common/Component/TableMoreMenu";
 import FilterCpn from "../../Common/Component/FilterCpn";
 import './Quanlyve.scss'
+import '../../Common/Style/css/colorTabs.scss'
 // ----------------------------------------------------------------------
 
 const TABLE_HEAD = [
@@ -66,7 +67,7 @@ const USERLIST = [
     bookcode: "ALT20210501",
     number: "123456789035",
     event: "Hội chợ triển lãm tiêu dùng 2021",
-    status: "Đã sử dụng",
+    status: "Chưa sử dụng",
     datesd: "14/04/2021",
     datexv: "14/04/2021",
     cong: "Cổng 1"
@@ -76,7 +77,7 @@ const USERLIST = [
     bookcode: "ALT20210501",
     number: "123456789036",
     event: "Hội chợ triển lãm tiêu dùng 2021",
-    status: "Đã sử dụng",
+    status: "Hết hạn",
     datesd: "14/04/2021",
     datexv: "14/04/2021",
     cong: "Cổng 1"
@@ -217,6 +218,7 @@ export const QuanLyVe = () => {
                         borderRadius: '16px',
                         boxShadow: 24,
                         p: 4,
+                        padding: '18px !important',
                     }}>
                       <FilterCpn/>
                     </Box>
@@ -274,7 +276,12 @@ export const QuanLyVe = () => {
                       <StyledTableCell align="left">
                         {event}
                       </StyledTableCell>
-                      <StyledTableCell align="left">{status}</StyledTableCell>
+                      <StyledTableCell align="left">
+                        <div className={
+                          status === "Đã sử dụng" ? "used" : status === "Chưa sử dụng" ? "notused" : status === "Hết hạn" ? "expired" : "notthing"
+                        }>
+                      <li/>{status}
+                      </div></StyledTableCell>
                       <StyledTableCell align="left">{datesd}</StyledTableCell>
                       <StyledTableCell align="left">{datexv}</StyledTableCell>
                       <StyledTableCell align="left">{cong}</StyledTableCell>
