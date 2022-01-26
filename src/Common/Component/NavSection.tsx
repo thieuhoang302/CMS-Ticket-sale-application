@@ -1,6 +1,10 @@
 import Avatar from '@mui/material/Avatar';
 import AVT from '../Style/img/avatar.png';
 import Logo from '../Style/img/logo-insight.png'
+import { ReactComponent as Homeicon } from '../Style/img/home.svg';
+import { ReactComponent as QLVicon } from '../Style/img/Quanlyve.svg';
+import { ReactComponent as DSVicon } from '../Style/img/Doisoatve.svg';
+import { ReactComponent as Caidaticon } from '../Style/img/Caidat.svg';
 import '../Style/css/navHeader.scss'
 import TrangChu from '../../Views/TrangChu/TrangChu';
 import QuanLyVe  from '../../Views/QuanlyVe/QuanLyVe';
@@ -8,8 +12,6 @@ import DoiSoatVe from '../../Views/DoiSoatVe/DoiSoatVe';
 import CaiDat from '../../Views/CaiDat/CaiDat';
 import NotificationsNoneOutlinedIcon from '@mui/icons-material/NotificationsNoneOutlined';
 import EmailOutlinedIcon from '@mui/icons-material/EmailOutlined';
-import ConfirmationNumberOutlinedIcon from '@mui/icons-material/ConfirmationNumberOutlined';
-import ReceiptOutlinedIcon from '@mui/icons-material/ReceiptOutlined';
 import SearchBar from "material-ui-search-bar";
 import React, { useState } from "react";
 import {
@@ -19,14 +21,10 @@ import {
   Menu,
   MenuItem,
 } from "react-pro-sidebar";
-import HomeOutlinedIcon from '@mui/icons-material/HomeOutlined';
-import SettingsOutlinedIcon from '@mui/icons-material/SettingsOutlined';
 import "react-pro-sidebar/dist/css/styles.css";
 
 
 import { Grid } from "@mui/material";
-
-import AccountCircleOutlinedIcon from "@mui/icons-material/AccountCircleOutlined";
 
 export const NavSection = () => {
   
@@ -119,9 +117,9 @@ export const NavSection = () => {
                         <MenuItem
                           active={true}
                           icon={
-                            <HomeOutlinedIcon
+                            <Homeicon
                               className={
-                                isClicked === "home" ? "iconClicked" : "noClick"
+                                isClicked === "home" ? "iconClicked" : "nothing"
                               }
                             />
                           }
@@ -138,11 +136,11 @@ export const NavSection = () => {
                           <MenuItem
                             id="manage"
                             icon={
-                              <ConfirmationNumberOutlinedIcon
+                              <QLVicon
                                 className={
                                   isClicked === "manage"
                                     ? "iconClicked"
-                                    : "noClick"
+                                    : "nothing"
                                 }
                               />
                             }
@@ -156,9 +154,9 @@ export const NavSection = () => {
 
                         <MenuItem
                           icon={
-                            <ReceiptOutlinedIcon
+                            <DSVicon
                               className={
-                                isClicked === "control" ? "iconClicked" : "noClick"
+                                isClicked === "control" ? "iconClicked" : "nothing"
                               }
                             />
                           }
@@ -169,9 +167,9 @@ export const NavSection = () => {
                         </MenuItem>
                         <MenuItem
                           icon={
-                            <SettingsOutlinedIcon
+                            <Caidaticon
                               className={
-                                isClicked === "setting" ? "iconClicked" : "noClick"
+                                isClicked === "setting" ? "iconClicked" : "nothing"
                               }
                             />
                           }

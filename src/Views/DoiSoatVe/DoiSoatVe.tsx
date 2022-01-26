@@ -4,14 +4,12 @@ import { filter } from "lodash";
 import {
 Box,
   Stack,
-  Button,
   TableRow,
   TableBody,
   TableCell,
   Typography,
   Table,
   TableContainer,
-  TablePagination,
   styled,
   tableCellClasses,
   Grid,
@@ -22,6 +20,9 @@ Box,
 // components
 import HeadTable from "../../Common/Component/HeadTable";
 import ToolbarTable from "../../Common/Component/ToolbarTable";
+import Pagination from "../../Common/Component/Pagination";
+import { ReactComponent as Calendaricon } from '../../Common/Style/img/Calendaricon.svg';
+import { ReactComponent as CalendariconDead } from '../../Common/Style/img/CalendariconDead.svg';
 import "./Doisoatve.scss"
 import '../../Common/Style/css/labelcheckbox.scss'
 import { height } from "@mui/system";
@@ -161,9 +162,9 @@ export const DoiSoatVe = () => {
                 <Grid sx={{width: '875px'}}>
                     <div  className='bg' style={{marginRight:"15px"}}>
                     <div className="container-table">
-                        <Typography className="Title-QLV">
+                        <div className="Title-QLV">
                             Đối soát vé
-                        </Typography>
+                        </div>
                             <Box sx={{ width: '100%' }}>
                                 <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
                                     <Grid item xs={6}>
@@ -245,15 +246,9 @@ export const DoiSoatVe = () => {
                             </Table>
                             </TableContainer>
 
-                            <TablePagination
-                            rowsPerPageOptions={[5, 10, 25]}
-                            component="div"
-                            count={USERLIST.length}
-                            rowsPerPage={rowsPerPage}
-                            page={page}
-                            onPageChange={handleChangePage}
-                            onRowsPerPageChange={handleChangeRowsPerPage}
-                            />
+                            <div style={{ justifyContent: 'center', display: 'flex'}}>
+                              <Pagination/>
+                            </div>
                         </div>
                     </div>
                 </Grid>
@@ -288,15 +283,19 @@ export const DoiSoatVe = () => {
                             <p style={{ fontWeight: '600'}}>Từ ngày</p>
                             </Grid>
                             <Grid item xs={9}>
-                              lịch
+                              <div className='CalendarFake1' style={{ background: '#E0E0E0'}}>
+                                <a>01/05/2021 <CalendariconDead style={{ marginLeft: '32px', marginBottom: '2px'}}/></a>
+                              </div>
                             </Grid>
                         </Grid>
-                        <Grid container spacing={1.5} columns={16}>
+                        <Grid container spacing={1.5} columns={16} sx={{ marginTop: '0.7rem'}}>
                             <Grid item xs={7}>
                             <p style={{ fontWeight: '600'}}>Đến ngày</p>
                             </Grid>
                             <Grid item xs={9}>
-                              lịch
+                              <div className='CalendarFake1' style={{ background: '#F7F8FB'}}>
+                                <a>dd/mm/yy <Calendaricon style={{ marginLeft: '38px', marginBottom: '2px'}}/></a>
+                              </div>
                             </Grid>
                         </Grid>
                         <div style={{textAlign:"center"}}>

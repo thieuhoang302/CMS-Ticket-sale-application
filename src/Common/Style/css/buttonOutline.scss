@@ -71,3 +71,20 @@
     box-shadow: none;
     transform: translateY(0);
   }
+  .CalendarN{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    padding: 8px 12px;
+
+    width: 142px;
+    height: 40px;
+
+
+    /* Grey/4 */
+
+    border: 1px solid #A5A8B1;
+    box-sizing: border-box;
+    border-radius: 8px;
+  }

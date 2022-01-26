@@ -3,14 +3,12 @@ import { filter } from "lodash";
 // material
 import {
   Stack,
-  Button,
   TableRow,
   TableBody,
   TableCell,
   Typography,
   Table,
   TableContainer,
-  TablePagination,
   styled,
   tableCellClasses,
   Grid,
@@ -20,11 +18,13 @@ import {
   Backdrop 
 } from "@mui/material";
 import FilterAltOutlinedIcon from '@mui/icons-material/FilterAltOutlined';
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
 // components
 import HeadTable from "../../Common/Component/HeadTable";
 import ToolbarTable from "../../Common/Component/ToolbarTable";
 import TableMoreMenu from "../../Common/Component/TableMoreMenu";
 import FilterCpn from "../../Common/Component/FilterCpn";
+import Pagination from "../../Common/Component/Pagination";
 import './Quanlyve.scss'
 import '../../Common/Style/css/colorTabs.scss'
 // ----------------------------------------------------------------------
@@ -179,9 +179,9 @@ export const QuanLyVe = () => {
   return (
     <div className="mainTC">
       <div className="container-table">
-      <Typography className="Title-QLV">
+      <div className="Title-QLV">
         Danh sách vé
-      </Typography>
+      </div>
         <Box sx={{ width: '100%' }}>
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={6}>
@@ -280,7 +280,7 @@ export const QuanLyVe = () => {
                         <div className={
                           status === "Đã sử dụng" ? "used" : status === "Chưa sử dụng" ? "notused" : status === "Hết hạn" ? "expired" : "notthing"
                         }>
-                      <li/>{status}
+                      <FiberManualRecordIcon sx={{ width: '15px !important', marginRight: '3px'}}/>{status}
                       </div></StyledTableCell>
                       <StyledTableCell align="left">{datesd}</StyledTableCell>
                       <StyledTableCell align="left">{datexv}</StyledTableCell>
@@ -299,16 +299,10 @@ export const QuanLyVe = () => {
             </TableBody>
           </Table>
         </TableContainer>
-
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={USERLIST.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <div style={{ justifyContent: 'center', display: 'flex'}}>
+          <Pagination/>
+        </div>
+        
     </div>
     </div>
       );

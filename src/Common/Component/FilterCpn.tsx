@@ -1,10 +1,10 @@
 import React from 'react'
 import '../Style/css/buttonOutline.scss'
 import '../Style/css/labelcheckbox.scss'
+import { ReactComponent as Calendaricon } from '../Style/img/Calendaricom.svg'
 import { Box, 
     Typography, 
     FormControl, 
-    FormLabel, 
     FormControlLabel, 
     FormGroup, 
     Checkbox,
@@ -29,16 +29,20 @@ export const FilterCpn = () => {
                         <Typography sx={{ fontWeight: '600', color: '#1E0D03' }}>
                             Từ ngày
                         </Typography>
-                        calendar here!
+                        <div className='CalendarFake'>
+                            <a>01/04/2021 <Calendaricon style={{ marginLeft: '8px', marginBottom: '2px'}}/></a>
+                        </div>
                     </Grid>
                     <Grid item xs={6}>
                         <Typography sx={{ fontWeight: '600', color: '#1E0D03' }}>
                             Đến ngày
                         </Typography>
-                        calendar here!
+                        <div className='CalendarFake'>
+                            <a>01/04/2021 <Calendaricon style={{ marginLeft: '8px', marginBottom: '2px'}}/></a>
+                        </div>
                     </Grid>
                 </Grid>
-                <FormControl component="fieldset" sx={{ marginTop: '20px'}}>
+                <FormControl component="fieldset" sx={{ marginTop: '30px'}}>
                     <Typography sx={{ color: '#1E0D03', fontWeight: '600'}}>Tình trạng sử dụng</Typography>
                         <RadioGroup sx={{ marginLeft: '10px', width:"100%"}} row name="row-radio-buttons-group">
                             <FormControlLabel style={{marginRight:"20px"}} value="all" control={<Radio sx={{ color: '#27AEF9 !important' }}/>} label="Tất cả" />
@@ -49,7 +53,7 @@ export const FilterCpn = () => {
                 </FormControl>
                 <FormControl component="fieldset" sx={{width:"100%"}}>
                 <Typography sx={{ color: '#1E0D03', fontWeight: '600'  }}>Cổng Check - in</Typography>
-                    <FormGroup sx={{ marginLeft: '10px', marginTop: '10px'}} aria-label="position" row>
+                <FormGroup sx={{ marginLeft: '10px', marginTop: '10px'}} aria-label="position" row>
                         <Grid container spacing={3}>
                             <Grid item xs>
                                 <FormControlLabel control={<Checkbox sx={{ color: '#27AEF9 !important' }} defaultChecked />} label="Tất cả" />
@@ -61,7 +65,7 @@ export const FilterCpn = () => {
                                 <FormControlLabel control={<Checkbox sx={{ color: '#27AEF9 !important' }} />} label="Cổng 2" />
                             </Grid>
                         </Grid>
-                    </FormGroup>
+                </FormGroup>
                 <FormGroup sx={{ marginLeft: '10px',  marginTop: '10px' }} aria-label="position" row>
                     <Grid container spacing={3}>
                         <Grid item xs>

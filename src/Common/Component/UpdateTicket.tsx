@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/no-redundant-roles */
 import React from 'react'
 import '../Style/css/buttonOutline.scss'
+import { ReactComponent as Calendaricon } from '../Style/img/Calendaricom.svg';
+import { ReactComponent as Clockicon } from '../Style/img/Clockicon.svg';
 import { Box, 
     Typography, 
     FormControl, 
@@ -10,10 +13,14 @@ import { Box,
     Grid,
     RadioGroup,
     Radio,
-    TextField
-
+    TextField,
   } from '@mui/material';
-export const UpdateTicket = () => {
+
+interface CloseModal {
+    handleCloseUD?: (event: React.MouseEvent<HTMLButtonElement>) => void
+}
+export const UpdateTicket = ({handleCloseUD}:CloseModal) => {
+
     return (
         <div>
              <Box
@@ -56,13 +63,28 @@ export const UpdateTicket = () => {
                             <Typography sx={{ fontWeight: '600', fontSize:'16px'}}>
                                 Ngày áp dụng
                             </Typography>
-                            lịch
+                            <Box sx={{display: 'flex'}}>
+                                <div className='CalendarN'>
+                                    <a>01/04/2021 <Calendaricon style={{ marginLeft: '5px', marginBottom: '2px'}}/></a>
+                                </div>
+                                <div className='CalendarN' style={{ marginLeft: '10px'}}>
+                                    <a>08:00:00 <Clockicon style={{ marginLeft: '10px', marginBottom: '2px'}}/></a>
+                                </div>
+                            </Box>
+
                         </Grid>
                         <Grid item xs={6}>
                             <Typography sx={{ fontWeight: '600', fontSize:'16px'}}>
                                 Ngày hết hạn
                             </Typography>
-                            lịch
+                            <Box sx={{display: 'flex'}}>
+                                <div className='CalendarN'>
+                                    <a>01/04/2021 <Calendaricon style={{ marginLeft: '5px', marginBottom: '2px'}}/></a>
+                                </div>
+                                <div className='CalendarN' style={{ marginLeft: '10px'}}>
+                                    <a>08:00:00 <Clockicon style={{ marginLeft: '10px', marginBottom: '2px'}}/></a>
+                                </div>
+                            </Box>
                         </Grid>
                     </Grid>
                 </div> 
@@ -110,7 +132,7 @@ export const UpdateTicket = () => {
                     
                 </div>           
                 <div style={{textAlign:"center"}}>
-                <button className="button-28" style={{ width:"140px", marginTop:"20px", marginBottom: "3px", marginRight: "20px"}} role="button">Hủy</button>
+                <button className="button-28" onClick={handleCloseUD} style={{ width:"140px", marginTop:"20px", marginBottom: "3px", marginRight: "20px"}} role="button">Hủy</button>
                 <button className="button-29" style={{ width:"140px", marginTop:"20px", marginBottom: "3px"}} role="button">Lưu</button>
                 </div>
                 

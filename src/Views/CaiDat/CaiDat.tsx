@@ -9,7 +9,6 @@ import {
   Typography,
   Table,
   TableContainer,
-  TablePagination,
   styled,
   tableCellClasses,
   Grid,
@@ -19,7 +18,9 @@ import {
   Backdrop ,
   Button
 } from "@mui/material";
-import AutoFixHighOutlinedIcon from '@mui/icons-material/AutoFixHighOutlined';
+import { ReactComponent as Updateicon } from '../../Common/Style/img/Update.svg'
+import FiberManualRecordIcon from '@mui/icons-material/FiberManualRecord';
+import Pagination from "../../Common/Component/Pagination";
 // components
 import HeadTable from "../../Common/Component/HeadTable";
 import ToolbarTable from "../../Common/Component/ToolbarTable";
@@ -164,9 +165,9 @@ export const CaiDat = () => {
   return (
     <div className="mainTC">
       <div className="container-table">
-      <Typography className="Title-QLV">
+      <div className="Title-QLV">
         Danh sách gói vé
-      </Typography>
+      </div>
         <Box sx={{ width: '100%' }}>
           <Grid container rowSpacing={1} columnSpacing={{ xs: 1, sm: 2, md: 3 }}>
             <Grid item xs={6}>
@@ -205,7 +206,7 @@ export const CaiDat = () => {
                         p: 4,
                         padding: '18px !important',
                     }}>
-                      <AddTicket/>
+                      <AddTicket handleClose={handleClose}/>
                     </Box>
                   </Fade>
                 </Modal>  
@@ -268,10 +269,10 @@ export const CaiDat = () => {
                         <div className={
                           status === "Đang áp dụng" ? "using" : status === "Tắt" ? "off" : "notthing"
                         }>
-                      <li/>{status}
+                      <FiberManualRecordIcon sx={{ width: '15px !important', marginRight: '3px'}}/>{status}
                       </div></StyledTableCell>
                       <StyledTableCell align="right">
-                        <Button sx={{ color: '#FF993C !important' }} onClick={handleOpenUD} variant="text"><AutoFixHighOutlinedIcon/>Cập nhập</Button>
+                        <Button sx={{ color: '#FF993C !important' }} onClick={handleOpenUD} variant="text"><Updateicon/>Cập nhập</Button>
                           <Modal
                           open={openUD}
                           onClose={handleCloseUD}
@@ -294,7 +295,7 @@ export const CaiDat = () => {
                                 p: 4,
                                 padding: '18px !important',
                             }}>
-                              <UpdateTicket/>
+                              <UpdateTicket handleCloseUD={handleCloseUD}/>
                             </Box>
                             </Fade>
                           </Modal> 
@@ -311,15 +312,9 @@ export const CaiDat = () => {
           </Table>
         </TableContainer>
         
-        <TablePagination
-          rowsPerPageOptions={[5, 10, 25]}
-          component="div"
-          count={USERLIST.length}
-          rowsPerPage={rowsPerPage}
-          page={page}
-          onPageChange={handleChangePage}
-          onRowsPerPageChange={handleChangeRowsPerPage}
-        />
+        <div style={{ justifyContent: 'center', display: 'flex'}}>
+          <Pagination/>
+        </div>
     </div>
     </div>
       );

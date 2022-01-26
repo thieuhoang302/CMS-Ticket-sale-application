@@ -1,18 +1,21 @@
 import React from "react";
 import ReactApexChart from "react-apexcharts";
 
-const ChartStatic = () => {
+interface ChartStaticProps {
+  dataChart: number[]
+}
+
+const ChartStatic = ({dataChart}:ChartStaticProps) => {
   const xList = ["Thứ 2", "Thứ 3", "Thứ 4", "Thứ 5", "Thứ 6", "Thứ 7", "CN"];
-  const yList = [145, 170, 178, 231, 212, 198 , 188];
+  const yList = dataChart;
 
   const chartSeries = [
     {
-      name: "Fuel Usage",
+      name: "Doanh thu",
       data: yList
     }
   ];
-
-  const chartOptions = {
+  const chartOptions:any = {
     chart: { toolbar: "false" },
     dataLabels: { enabled: !1 },
     stroke: { curve: "smooth", width: 2 },
@@ -24,7 +27,13 @@ const ChartStatic = () => {
       tickAmount: 3,
       min: 140,
       max: 260,
+      labels: {
+        formatter: function (value:any) {
+          return value + "tr";
+        },
+      },
     },
+    
     colors: ["#FF993C"],
     fill: {
       type: "gradient",
