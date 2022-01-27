@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux";
 import { filter } from "lodash";
 // material
 import {
@@ -27,6 +29,7 @@ import ToolbarTable from "../../Common/Component/ToolbarTable";
 import TableMoreMenu from "../../Common/Component/TableMoreMenu";
 import AddTicket from "../../Common/Component/AddTicket";
 import UpdateTicket from "../../Common/Component/UpdateTicket";
+import { getDataCD } from "../../redux/actions/CaiDatAction";
 import '../../Common/Style/css/colorTabs.scss'
 // ---------------------------------------------------------------------
 
@@ -42,30 +45,6 @@ const TABLE_HEAD = [
   { id: " " },
   
 ];
-
-const USERLIST = [
-  {
-    stt:"1",
-    bookcode:"ALT20210501",
-    namegoive:"Gói gia đình",
-    datead:"14/04/2021",
-    dateexpired:"14/04/2021",
-    prices:"90.000 VNĐ",
-    comboprices:"360.000 VNĐ/4 Vé",
-    status:"Đang áp dụng",
-  },
-  {
-    stt:"2",
-    bookcode:"ALT20210501",
-    namegoive:"Gói sự kiện",
-    datead:"14/04/2021",
-    dateexpired:"14/04/2021",
-    prices:"20.000 VNĐ",
-    comboprices:" ",
-    status:"Tắt",
-  }
-];
-
 // ----------------------------------------------------------------------
 
 const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -111,7 +90,7 @@ function applySortFilter(array: any, comparator: any, query: any) {
     return filter(
       array,
       (_fillter) =>
-        _fillter.number.toLowerCase().indexOf(query.toLowerCase()) !== -1
+        _fillter.bookcode.toLowerCase().indexOf(query.toLowerCase()) !== -1
     );
   }
   return stabilizedThis.map((el: any) => el[0]);
@@ -119,6 +98,7 @@ function applySortFilter(array: any, comparator: any, query: any) {
 
 
 export const CaiDat = () => {
+  const dispatch = useDispatch();
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
@@ -127,12 +107,15 @@ export const CaiDat = () => {
   const handleOpenUD = () => setOpenUD(true);
   const handleCloseUD = () => setOpenUD(false);
   
-  const [page, setPage] = useState(0);
   const [order, setOrder] = useState("asc");
 
-  const [orderBy, setOrderBy] = useState("number");
-  const [filterName, setFilterName] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const [orderBy, setOrderBy] = useState("bookcode");
+  const [filterName, setFilterName] = useState("");;
+  const { CD } = useSelector((state: RootState) => state.CD) || [];
+
+  useEffect(() => {
+    dispatch(getDataCD());
+  }, []);
 
   const handleRequestSort = (event: any, property: any) => {
     const isAsc = orderBy === property && order === "asc";
@@ -140,24 +123,13 @@ export const CaiDat = () => {
     setOrderBy(property);
   };
 
-  const handleChangePage = ({ event, newPage }: any) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: any) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
 
   const handleFilterByName = (event: any) => {
     setFilterName(event.target.value);
   };
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
-
   const filteredUsers = applySortFilter(
-    USERLIST,
+    CD,
     getComparator(order, orderBy),
     filterName
   );
@@ -226,12 +198,11 @@ export const CaiDat = () => {
               order={order}
               orderBy={orderBy}
               headLabel={TABLE_HEAD}
-              rowCount={USERLIST.length}
+              rowCount={CD.length}
               onRequestSort={handleRequestSort}
             />
             <TableBody>
               {filteredUsers
-                .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
                 .map((row: never) => {
                   const {
                     stt,
@@ -303,11 +274,6 @@ export const CaiDat = () => {
                     </StyledTableRow>
                   );
                 })}
-              {emptyRows > 0 && (
-                <TableRow style={{ height: 53 * emptyRows }}>
-                  <TableCell colSpan={6} />
-                </TableRow>
-              )}
             </TableBody>
           </Table>
         </TableContainer>

@@ -1,4 +1,6 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
+import { RootState } from "../../redux";
 import { filter } from "lodash";
 // material
 import {
@@ -23,6 +25,7 @@ import ToolbarTable from "../../Common/Component/ToolbarTable";
 import Pagination from "../../Common/Component/Pagination";
 import { ReactComponent as Calendaricon } from '../../Common/Style/img/Calendaricon.svg';
 import { ReactComponent as CalendariconDead } from '../../Common/Style/img/CalendariconDead.svg';
+import { getDataDSV } from "../../redux/actions/DSVAction";
 import "./Doisoatve.scss"
 import '../../Common/Style/css/labelcheckbox.scss'
 import { height } from "@mui/system";
@@ -35,42 +38,6 @@ const TABLE_HEAD = [
     { id: "cong", label: "Cổng check - in", alignRight: false },
     { id: "doisoat", label: " ", alignRight: false },
   ];
-  
-  const USERLIST = [
-    {
-      stt: "1",
-      number: "123456789034",
-      datesd: "14/04/2021",
-      nameve: "Vé cổng",
-      cong: "Cổng 1",
-      doisoat: "Chưa đối soát",
-    },
-    {
-      stt: "2",
-      number: "123456789034",
-      datesd: "14/04/2021",
-      nameve: "Vé cổng",
-      cong: "Cổng 1",
-      doisoat: "Đã đối soát",
-    },
-    {
-      stt: "3",
-      number: "123456789034",
-      datesd: "14/04/2021",
-      nameve: "Vé cổng",
-      cong: "Cổng 1",
-      doisoat: "Đã đối soát",
-    },
-    {
-      stt: "4",
-      number: "123456789035",
-      datesd: "14/04/2021",
-      nameve: "Vé cổng",
-      cong: "Cổng 1",
-      doisoat: "Đã đối soát",
-    },
-  ];
-  
   // ----------------------------------------------------------------------
   
   const StyledTableCell = styled(TableCell)(({ theme }) => ({
@@ -116,18 +83,22 @@ const TABLE_HEAD = [
       return filter(
         array,
         (_fillter) =>
-          _fillter.number.toLowerCase().indexOf(query.toLowerCase()) !== -1
+          _fillter.number.toString().indexOf(query.toString()) !== -1
       );
     }
     return stabilizedThis.map((el: any) => el[0]);
   }
 export const DoiSoatVe = () => {
-    const [page, setPage] = useState(0);
+  const dispatch = useDispatch();
   const [order, setOrder] = useState("asc");
 
   const [orderBy, setOrderBy] = useState("number");
   const [filterName, setFilterName] = useState("");
-  const [rowsPerPage, setRowsPerPage] = useState(5);
+  const { DSV } = useSelector((state: RootState) => state.DSV) || [];
+
+  useEffect(() => {
+    dispatch(getDataDSV());
+  }, []);
 
   const handleRequestSort = (event: any, property: any) => {
     const isAsc = orderBy === property && order === "asc";
@@ -135,24 +106,13 @@ export const DoiSoatVe = () => {
     setOrderBy(property);
   };
 
-  const handleChangePage = ({ event, newPage }: any) => {
-    setPage(newPage);
-  };
-
-  const handleChangeRowsPerPage = (event: any) => {
-    setRowsPerPage(parseInt(event.target.value, 10));
-    setPage(0);
-  };
-
   const handleFilterByName = (event: any) => {
     setFilterName(event.target.value);
   };
 
-  const emptyRows =
-    page > 0 ? Math.max(0, (1 + page) * rowsPerPage - USERLIST.length) : 0;
 
   const filteredUsers = applySortFilter(
-    USERLIST,
+    DSV,
     getComparator(order, orderBy),
     filterName
   );
@@ -193,13 +153,12 @@ export const DoiSoatVe = () => {
                                 order={order}
                                 orderBy={orderBy}
                                 headLabel={TABLE_HEAD}
-                                rowCount={USERLIST.length}
+                                rowCount={DSV.length}
                                 onRequestSort={handleRequestSort}
                                 />
                                 <TableBody>
                                 {filteredUsers
-                                    .slice(page * rowsPerPage, page * rowsPerPage + rowsPerPage)
-                                    .map((row: never) => {
+                                    .map((row: any) => {
                                     const {
                                         stt,
                                         number,
@@ -237,11 +196,6 @@ export const DoiSoatVe = () => {
                                         </StyledTableRow>
                                     );
                                     })}
-                                {emptyRows > 0 && (
-                                    <TableRow style={{ height: 53 * emptyRows }}>
-                                    <TableCell colSpan={6} />
-                                    </TableRow>
-                                )}
                                 </TableBody>
                             </Table>
                             </TableContainer>
